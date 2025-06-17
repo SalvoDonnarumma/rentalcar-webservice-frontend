@@ -14,10 +14,16 @@ export class UtentiService {
     );
   };
 
-  getUserByEmail = (filtro: string): import('rxjs').Observable<IUtente[]> => {
+  searchUsersUsingEmail = (filtro: string): import('rxjs').Observable<IUtente[]> => {
     console.log('Filtro ricevuto: ' + filtro);
     return this.httpClient.get<IUtente[]>(
       'http://localhost:8080/utenti/cerca/filtro/' + filtro
+    );
+  };
+
+  getUserByEmail = (email: string): import('rxjs').Observable<IUtente> => {
+    return this.httpClient.get<IUtente>(
+      'http://localhost:8080/utenti/cerca/email/' + email
     );
   };
 

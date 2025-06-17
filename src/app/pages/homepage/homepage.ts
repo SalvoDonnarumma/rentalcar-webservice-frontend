@@ -59,7 +59,7 @@ export class Homepage implements OnInit {
 
       if (ruolo?.trim() === 'ROLE_ADMIN') {
         if (this.filter) {
-          this.utentiService.getUserByEmail(this.filter).subscribe({
+          this.utentiService.searchUsersUsingEmail(this.filter).subscribe({
             next: this.handleResponse.bind(this),
             error: this.handleError.bind(this),
           });

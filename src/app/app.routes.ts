@@ -81,6 +81,13 @@ export const routes: Routes = [
     data: { roles: [Ruoli.amministratore, Ruoli.utente] },
   },
   {
+    path: 'profiloutente',
+    loadComponent: () =>
+      import('./pages/profiloutente/profiloutente').then((m) => m.Profiloutente),
+    canActivate: [AuthGuard],
+    data: { roles: [Ruoli.amministratore, Ruoli.utente] },
+  },
+  {
     path: '**',
     loadComponent: () =>
       import('./pages/errorpage/errorpage').then((m) => m.Errorpage),

@@ -19,15 +19,6 @@
           Parco Auto
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" title="Promozioni" routerLink="/promozione">Promozioni</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" title="Fidelity" routerLink="/fidelity">Fidelity</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" title="Ordini" routerLink="/ordini">Ordini</a>
-        </li>
       </ul>
 
       <!-- Menu contestuale dell'utente -->
@@ -39,6 +30,7 @@
           <li><a class="dropdown-item" routerLink="/login">Accedi</a></li>
 
           @if (jwtAuth.isLogged()) {
+            <li><a class="dropdown-item" routerLink="/profiloutente">Il mio profilo</a></li>
               <li><a class="dropdown-item" routerLink="/logout">Logout {{jwtAuth.loggedUser()}}</a></li>
           } @else {
             <li><a class="dropdown-item disabled" href="#">Logout</a></li>
