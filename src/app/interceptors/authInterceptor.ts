@@ -19,6 +19,12 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const authToken = this.authService.getAuthToken();
+
+    if(this.authService.isTokenExpired(authToken)){
+      console.log('Token scaduto!');
+      const error = 'Expired';
+      this.router.navigate(['logout', error]);
+    }
     
     if (authToken) {
       request = request.clone({
@@ -27,8 +33,6 @@ export class AuthInterceptor implements HttpInterceptor {
         }
       });
     }
-
-    console.log('Intercepted request:', request);
     
     return next.handle(request);
   }

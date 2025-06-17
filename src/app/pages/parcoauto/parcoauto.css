@@ -1,0 +1,33 @@
+.content-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.card-header .row {
+  align-items: center;
+}
+
+button.newart {
+  width: auto;
+  white-space: nowrap;
+  margin-left: 10px;
+  height: 100%;
+}
+
+.my-pagination {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.form-select {
+  max-width: 150px;
+  margin-top: 10px;
+}
+
+.table-hover th,
+.table-hover td {
+  text-align: center;
+  vertical-align: middle;
+}

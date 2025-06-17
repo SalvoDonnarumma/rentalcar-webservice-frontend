@@ -11,12 +11,12 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" routerLink="/welcome">Home</a>
+          <a class="nav-link" aria-current="page" routerLink="/homepage">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" title="Prodotti" routerLink="/articoli">
+          <a class="nav-link" title="parcoauto" routerLink="/parcoauto">
           <span class="material-icons md-archive" aria-hidden="true"></span>
-          Prodotti
+          Parco Auto
           </a>
         </li>
         <li class="nav-item">
@@ -37,11 +37,14 @@
         </button>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" routerLink="/login">Accedi</a></li>
-          <li><a class="dropdown-item"*ngIf="jwtAuth.isLogged" routerLink="/logout">Logout {{jwtAuth.loggedUser()}}</a></li>
-          <li><a class="dropdown-item disabled" *ngIf="!jwtAuth.isLogged" href="#">Logout</a></li>
+
+          @if (jwtAuth.isLogged()) {
+              <li><a class="dropdown-item" routerLink="/logout">Logout {{jwtAuth.loggedUser()}}</a></li>
+          } @else {
+            <li><a class="dropdown-item disabled" href="#">Logout</a></li>
+          }
         </ul>
       </div>
     </div>
   </div>
 </nav>
-

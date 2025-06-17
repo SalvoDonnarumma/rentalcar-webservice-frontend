@@ -1,0 +1,99 @@
+<section class="content-main">
+  <div class="content-header d-flex justify-content-between align-items-center">
+    <h2 class="content-title">Lista Veicoli</h2>
+    @if (isAdmin) {
+    <button class="btn btn-success" routerLink="aggiungiveicolo">
+      <i class="material-icons md-add"></i> Aggiungi
+    </button>
+    }
+  </div>
+
+  <div class="card mb-4">
+    <header class="card-header">
+      <div class="row gx-3">
+        <div class="col-lg-4 col-md-6 me-auto">
+          <input
+            type="text"
+            placeholder="Cerca..."
+            class="form-control"
+            [(ngModel)]="filter"
+          />
+        </div>
+        <button class="btn btn-primary newart" (click)="cerca()">
+          <i class="material-icons md-plus"></i>
+          Ricerca
+        </button>
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="table-responsive">
+        @if (veicoli$.length > 0) {
+        <table class="table table-hover text-center align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>ID</th>
+              <th>Targa</th>
+              <th>Anno</th>
+              <th>Modello</th>
+              <th>Casa Produttrice</th>
+              <th>Tipologia</th>
+              <th>Azioni</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let veicolo of veicoli$ | paginate: { itemsPerPage: itemsForPage, currentPage: currentPage }"
+            >
+              <td>{{ veicolo.id }}</td>
+              <td>{{ veicolo.targa }}</td>
+              <td>{{ veicolo.annoImmatricolazione }}</td>
+              <td>{{ veicolo.modello }}</td>
+              <td>{{ veicolo.casaProduttrice }}</td>
+              <td>{{ veicolo.tipologia }}</td>
+              <td>
+                @if (isAdmin) {
+                <button
+                  class="btn btn-sm btn-primary me-2"
+                  (click)="modificaVeicolo(veicolo)"
+                >
+                  Modifica
+                </button>
+                <button
+                  class="btn btn-sm btn-danger"
+                  (click)="eliminaVeicolo(veicolo.id)"
+                >
+                  Elimina
+                </button>
+                } @else {
+                <button class="btn btn-sm btn-warning">Prenota</button>
+                }
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        } @else {
+        <p class="text-center mt-4">Nessun veicolo disponibile.</p>
+        }
+      </div>
+
+      <nav class="float-end mt-3" aria-label="Paginazione veicoli">
+        <pagination-controls
+          class="my-pagination"
+          (pageChange)="currentPage = $event"
+          previousLabel="Precedente"
+          nextLabel="Successivo"
+        >
+        </pagination-controls>
+      </nav>
+
+      <div class="col-lg-2 col-6 col-md-3 mt-3">
+        <select class="form-select" [(ngModel)]="itemsForPage">
+          <option [value]="5">Mostra 5</option>
+          <option [value]="10">Mostra 10</option>
+          <option [value]="20">Mostra 20</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</section>

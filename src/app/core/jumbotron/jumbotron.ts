@@ -1,21 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-jumbotron',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './jumbotron.html',
   styleUrl: './jumbotron.css'
 })
 export class Jumbotron implements OnInit{
 
-  @Input()
-  Titolo: string = "";
+  Titolo = input('Benvenuto!');
 
-  @Input()
-  SottoTitolo: string = "";
+  SottoTitolo = input('');
 
-  @Input()
-  Show: boolean = true;
+  Show = input(true);
 
   constructor() {
   }

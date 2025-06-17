@@ -1,0 +1,28 @@
+<form [formGroup]="veicoloForm" (ngSubmit)="onSubmit()">
+  <label>
+    Targa:
+    <input formControlName="targa" />
+  </label>
+
+  <label>
+    Anno Immatricolazione:
+    <input type="number" min="1900" max="2099" formControlName="annoImmatricolazione" />
+  </label>
+
+  <label>
+    Modello: 
+    <input formControlName="modello" />
+  </label>
+
+  <label>
+    Casa Produttrice: 
+    <input formControlName="casaProduttrice" />
+  </label>
+
+  <label>
+    Tipologia: 
+    <input formControlName="tipologia" />
+  </label>
+
+  <button type="submit">Aggiungi Veicolo</button>
+</form>

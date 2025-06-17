@@ -1,0 +1,50 @@
+<form [formGroup]="utenteForm" (ngSubmit)="onSubmit()">
+  <label>
+    Nome:
+    <input formControlName="nome" />
+  </label>
+
+  <label>
+    Cognome:
+    <input formControlName="cognome" />
+  </label>
+
+  <label>
+    Data di nascita:
+    <input type="date" formControlName="dataNascita" />
+  </label>
+
+  <label>
+    Ruolo:
+    <select formControlName="ruolo">
+      <option value="user">User</option>
+      <option value="admin">Admin</option>
+    </select>
+  </label>
+
+  <label>
+    Email:
+    <input type="email" formControlName="email" />
+  </label>
+  
+  @if (isEditMode) {
+  <label>Vecchia Password</label>
+  <input
+    type="password"
+    formControlName="vecchiaPassword"
+    class="form-control"
+  />
+  }
+
+  <label>
+    Password:
+    <input type="password" formControlName="password" />
+  </label>
+
+  <label>
+    Conferma Password:
+    <input type="password" formControlName="confermaPassword" />
+  </label>
+
+  <button type="submit">Aggiungi Utente</button>
+</form>
