@@ -30,6 +30,11 @@ export class VeicoliService {
     return this.httpClient.get<IVeicolo[]>('http://localhost:8080/veicoli/cerca/tipologia/'+filter);
   }
 
+  getById = (filter: string): import('rxjs').Observable<IVeicolo> => {
+    return this.httpClient.get<IVeicolo>('http://localhost:8080/veicoli/cerca/veicoloid/'+filter);
+  }
+ 
+
   private readonly apiUrl = 'http://localhost:8080/veicoli';
   inserisciVeicolo(data: any) {
     console.log(data);

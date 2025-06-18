@@ -1,0 +1,44 @@
+<section class="profile-container">
+  <h2 class="profile-title">Dati Prenotazione</h2>
+
+  <div class="profile-card">
+    <div class="profile-field">
+      <label>Nome:</label>
+      <span>{{ utente$?.nome }}</span>
+    </div>
+
+    <div class="profile-field">
+      <label>Email:</label>
+      <span>{{ utente$?.email }}</span>
+    </div>
+
+    <div class="profile-field">
+      <label>Targa:</label>
+      <span>{{ veicolo$?.targa }}</span>
+    </div>
+
+    <div class="profile-field">
+      <label>Modello:</label>
+      <span>{{ veicolo$?.modello }}</span>
+    </div>
+
+    <div class="profile-field">
+      <label>Tipologia:</label>
+      <span>{{ veicolo$?.tipologia }}</span>
+    </div>
+
+    <br>
+    <label>Periodo di prenotazione: </label>
+    <form [formGroup]="prenotazioneForm" (ngSubmit)="onSubmit()">
+      <label>
+        Data di inizio:
+        <input type="date" formControlName="dataInizio" [min]="minDate"/>
+      </label>
+      <label>
+        Data di fine:
+        <input type="date" formControlName="dataFine" [min]="minDate" />
+      </label>
+      <button type="submit">Crea la prenotazione</button>
+    </form>
+  </div>
+</section>

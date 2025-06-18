@@ -137,4 +137,34 @@ export class Homepage implements OnInit {
       });
     }
   }
+
+  modificaPrenotazione(prenotazione: any): void {
+    console.log(prenotazione);
+    this.router.navigate(['parcoauto/aggiungiprenotazione'], {
+      state: { prenotazione: prenotazione },
+    });
+  }
+
+  eliminaPrenotazione(id: number): void {
+    const conferma = window.confirm(
+      'Sei sicuro di voler cancellare questa prenotazione?'
+    );
+  
+    if (conferma) {
+      this.prenotazioniService.eliminaPrenotazione(id).subscribe({
+        next: () => {
+          alert('Prenotazione eliminata con successo.');
+          const email = this.authService.getAuthUsername();
+          this.prenotazioniService.getCostumerHomepage(email, '', '').subscribe({
+            next: this.handleResponseCostumer.bind(this),
+            error: this.handleError.bind(this),
+          });
+        },
+        error: (err) => {
+          alert("Errore durante l'eliminazione dell'utente.");
+          console.error(err);
+        },
+      });
+    }
+  }
 }

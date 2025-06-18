@@ -104,7 +104,7 @@
 <section class="content-main">
   <div class="content-header">
     <h2 class="content-title">Le tue prenotazioni</h2>
-    <button class="btn btn-success" routerLink="parcoauto">
+    <button class="btn btn-success" routerLink="/parcoauto">
       <i class="material-icons md-add"></i> Aggiungi Prenotazione
     </button>
   </div>
@@ -161,22 +161,16 @@
               <td>{{ p.dataFine| date: 'dd-MM-yyyy' }}</td>
               <td>{{ p.stato }}</td>
               <td>
-                <!--<button
-                  class="btn btn-sm btn-primary me-2"
-                  (click)="modificaPrenotazione(p)"
-                >-->
                 <button
                   class="btn btn-sm btn-primary me-2"
+                  (click)="modificaPrenotazione(p)"
                 >
                   Modifica
                 </button>
 
-                <!--<button
-                  class="btn btn-sm btn-danger"
-                  (click)="eliminaPrenotazione(p.idPrenotazione)"
-                >-->
                 <button
                   class="btn btn-sm btn-danger"
+                  (click)="eliminaPrenotazione(p.idPrenotazione)"
                 >
                   Elimina
                 </button>

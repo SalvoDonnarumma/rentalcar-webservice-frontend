@@ -66,7 +66,6 @@ export class AuthJwtService {
 
   getUserRole(): string | null {
     const token = this.getAuthToken().replace('Bearer ', '');
-    console.log('Token prelevato: ' + token);
     try {
       const payload: any = jwtDecode(token);
       const role = payload.authorities;

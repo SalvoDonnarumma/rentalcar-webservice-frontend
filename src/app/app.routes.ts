@@ -67,6 +67,13 @@ export const routes: Routes = [
     data: { roles: [Ruoli.amministratore, Ruoli.utente] },
   },
   {
+    path: 'parcoauto/aggiungiprenotazione',
+    loadComponent: () =>
+      import('./pages/aggiungiprenotazione/aggiungiprenotazione').then((m) => m.Aggiungiprenotazione),
+    canActivate: [AuthGuard],
+    data: { roles: [Ruoli.amministratore, Ruoli.utente] },
+  },
+  {
     path: 'parcoauto/:filter',
     loadComponent: () =>
       import('./pages/parcoauto/parcoauto').then((m) => m.ParcoAuto),

@@ -152,6 +152,12 @@ export class ParcoAuto {
     });
   }
 
+  prenotaVeicolo(veicolo: any): void {
+    this.router.navigate(['parcoauto/aggiungiprenotazione'], {
+      state: { veicolo: veicolo },
+    });
+  }
+
   eliminaVeicolo(id: number): void {
     const conferma = window.confirm(
       'Sei sicuro di voler eliminare questo veicolo?'
