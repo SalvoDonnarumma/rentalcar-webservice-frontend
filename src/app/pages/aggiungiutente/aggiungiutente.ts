@@ -39,16 +39,23 @@ export class Aggiungiutente implements OnInit {
     const navigation = this.router.getCurrentNavigation();
     const utente = navigation?.extras?.state?.['utente'];
 
-    console.log('Utente salvato:', utente);
-
     if (utente) {
       this.isEditMode = true;
-      this.utenteForm.patchValue(utente);
+      this.utenteForm.patchValue({
+        id: utente.id,
+        nome: utente.nome,
+        cognome: utente.cognome,
+        ruolo: utente.ruolo,
+        email: utente.email,
+        password: [''],
+        confermaPassword: [''],
+        vecchiaPassword: [''],
+        dataNascita: utente.dataNascita,
+      });
     }
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSubmit(): void {
     const rawDate = this.utenteForm.value.dataNascita;

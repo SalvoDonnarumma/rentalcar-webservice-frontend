@@ -23,6 +23,7 @@ import { PrenotazioniService } from '../../services/Data/prenotazioni-service';
 })
 export class Homepage implements OnInit {
   utenti$: IUtente[] = [];
+  utente$: IUtente | undefined;
   prenotazioni$: IPrenotazione[] = [];
   errore: string = '';
 
@@ -70,20 +71,28 @@ export class Homepage implements OnInit {
           });
         }
       } else if (ruolo?.trim() === 'ROLE_USER') {
-        this.prenotazioniService
-          .getCostumerHomepage(email, this.dataInit || '', this.dataFin || '')
-          .subscribe({
-            next: this.handleResponseCostumer.bind(this),
-            error: this.handleError.bind(this),
-          });
+        this.utentiService.getUserByEmail(email).subscribe({
+          next: (response) => {
+            console.log(response);
+            this.utente$ = response;
+            this.prenotazioniService
+              .getPrenotazioniByUtenteId(
+                this.utente$.id,
+                this.dataInit || '',
+                this.dataFin || ''
+              )
+              .subscribe({
+                next: this.handleResponseCostumer.bind(this),
+                error: this.handleError.bind(this),
+              });
+          },
+        });
       }
     });
   }
 
   handleResponse(response: any) {
     this.utenti$ = response.data;
-    console.log('Utenti estratti: ');
-    console.log(this.utenti$);
     this.currentPage = 1;
   }
 
@@ -149,16 +158,18 @@ export class Homepage implements OnInit {
     const conferma = window.confirm(
       'Sei sicuro di voler cancellare questa prenotazione?'
     );
-  
+
     if (conferma) {
       this.prenotazioniService.eliminaPrenotazione(id).subscribe({
         next: () => {
           alert('Prenotazione eliminata con successo.');
           const email = this.authService.getAuthUsername();
-          this.prenotazioniService.getCostumerHomepage(email, '', '').subscribe({
-            next: this.handleResponseCostumer.bind(this),
-            error: this.handleError.bind(this),
-          });
+          this.prenotazioniService
+            .getPrenotazioniByUtenteId(this.utente$?.id ?? 0, '', '')
+            .subscribe({
+              next: this.handleResponseCostumer.bind(this),
+              error: this.handleError.bind(this),
+            });
         },
         error: (err) => {
           alert("Errore durante l'eliminazione dell'utente.");
@@ -166,5 +177,12 @@ export class Homepage implements OnInit {
         },
       });
     }
+  }
+
+  visualizzaPrenotazioni(id: number) {
+    console.log(id);
+    this.router.navigate(['homepage/listaprenotazioni'], {
+      state: { utenteId: id },
+    });
   }
 }

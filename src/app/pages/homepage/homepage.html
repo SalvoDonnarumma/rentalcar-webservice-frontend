@@ -68,6 +68,13 @@
                 >
                   Elimina
                 </button>
+
+                <button
+                  class="btn btn-sm btn-success"
+                  (click)="visualizzaPrenotazioni(utente.id)"
+                >
+                  Lista Prenotazioni
+                </button>
               </td>
             </tr>
           </tbody>
@@ -164,6 +171,7 @@
                 <button
                   class="btn btn-sm btn-primary me-2"
                   (click)="modificaPrenotazione(p)"
+                  [disabled]="!p.isPrenotazioneValid"
                 >
                   Modifica
                 </button>

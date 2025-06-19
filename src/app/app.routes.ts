@@ -46,6 +46,13 @@ export const routes: Routes = [
     data: { roles: [Ruoli.amministratore] },
   },
   {
+    path: 'homepage/listaprenotazioni',
+    loadComponent: () =>
+      import('./pages/listaprenotazioni/listaprenotazioni').then((m) => m.Listaprenotazioni),
+    canActivate: [AuthGuard],
+    data: { roles: [Ruoli.amministratore] },
+  },
+  {
     path: 'homepage/:filter',
     loadComponent: () =>
       import('./pages/homepage/homepage').then((m) => m.Homepage),

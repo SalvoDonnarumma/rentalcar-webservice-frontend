@@ -35,7 +35,6 @@ export class Aggiungiprenotazione implements OnInit {
     private veicoliService: VeicoliService,
     private utentiService: UtentiService,
     private authService: AuthJwtService,
-    private route: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router
   ) {
@@ -51,7 +50,7 @@ export class Aggiungiprenotazione implements OnInit {
     this.veicolo$ = navigation?.extras?.state?.['veicolo'];
 
     this.prenotazione = navigation?.extras?.state?.['prenotazione'];
-    
+
     if (this.prenotazione) {
       this.isEditMode = true;
 
@@ -84,10 +83,12 @@ export class Aggiungiprenotazione implements OnInit {
     });
 
     if (!this.veicolo$ && this.prenotazione?.idPrenotazione !== undefined) {
-      this.veicoliService.getById(String(this.prenotazione.idVeicolo)).subscribe({
-        next: this.handleResponseVeicoloService.bind(this),
-        error: this.handleError.bind(this),
-      });
+      this.veicoliService
+        .getById(String(this.prenotazione.idVeicolo))
+        .subscribe({
+          next: this.handleResponseVeicoloService.bind(this),
+          error: this.handleError.bind(this),
+        });
     }
   }
 
@@ -95,7 +96,7 @@ export class Aggiungiprenotazione implements OnInit {
     this.utente$ = response;
   }
 
-  handleResponseVeicoloService(response: any){
+  handleResponseVeicoloService(response: any) {
     this.veicolo$ = response;
   }
 
@@ -121,6 +122,11 @@ export class Aggiungiprenotazione implements OnInit {
           },
           error: (err) => {
             this.handleError(err);
+            if (err.status === 400 && err.error?.message) {
+              alert(err.error.message);
+            } else {
+              alert('Errore generico nell’operazione.');
+            }
           },
         });
       } else {
@@ -131,6 +137,11 @@ export class Aggiungiprenotazione implements OnInit {
           },
           error: (err) => {
             this.handleError(err);
+            if (err.status === 400 && err.error?.message) {
+              alert(err.error.message);
+            } else {
+              alert('Errore generico nell’operazione.');
+            }
           },
         });
       }

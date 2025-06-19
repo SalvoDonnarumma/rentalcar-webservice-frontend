@@ -11,10 +11,6 @@ export class PrenotazioniService {
 
   constructor(private httpClient : HttpClient) { }
 
-  getCostumerHomepage = (email: string, dataInit: string, dataFin: string): import('rxjs').Observable<IPrenotazione[]> => {
-    return this.httpClient.get<IPrenotazione[]>('http://localhost:8080/prenotazioni/cerca/email/'+email+'?dataInit='+dataInit+'&dataFin='+dataFin);
-  }
-
   private readonly apiUrl = 'http://localhost:8080/prenotazioni';
   inserisciPrenotazione(data: any){
     console.log(data);
@@ -24,4 +20,14 @@ export class PrenotazioniService {
   eliminaPrenotazione(data: any){
     return this.httpClient.delete<any>('http://localhost:8080/prenotazioni/elimina/'+data);
   }
+
+  getPrenotazioniByUtenteId = (utenteId: number, dataInit: string, dataFin: string): import('rxjs').Observable<IPrenotazione[]> => {
+    return this.httpClient.get<IPrenotazione[]>('http://localhost:8080/prenotazioni/visualizzaprenotazioni/userid/'+utenteId);
+  }
+
+  validaPrenotazione = (idPrenotazione: string, stato: string): import('rxjs').Observable<any> => {
+    const url = `http://localhost:8080/prenotazioni/valida/${idPrenotazione}?modificaStato=${stato}`;
+    return this.httpClient.post<any>(url, null);
+  }
 }
+

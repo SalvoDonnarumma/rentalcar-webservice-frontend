@@ -1,0 +1,98 @@
+<section class="content-main">
+  <div class="content-header">
+    <h2 class="content-title">Lista prenotazioni dell'utente {{utenteId}}</h2>
+  </div>
+
+  <div class="card mb-4">
+    <header class="card-header">
+      <div class="row gx-3 align-items-end">
+        <div class="col-lg-3 col-md-4">
+          <label for="dataInit">Data Inizio</label>
+          <input
+            id="dataInit"
+            type="date"
+            class="form-control"
+            [(ngModel)]="dataInit"
+          />
+        </div>
+        <div class="col-lg-3 col-md-4">
+          <label for="dataFin">Data Fine</label>
+          <input
+            id="dataFin"
+            type="date"
+            class="form-control"
+            [(ngModel)]="dataFin"
+          />
+        </div>
+        <div class="col-lg-2">
+          <button class="btn btn-primary mt-4 w-100" (click)="cerca()">
+            <i class="material-icons md-search"></i>
+            Ricerca
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="card-body">
+      <div class="table-responsive">
+        @if (prenotazioni$.length > 0) {
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Id Prenotazione</th>
+              <th>Data Inizio Prenotazione</th>
+              <th>Data Fine Prenotazione</th>
+              <th>Stato</th>
+              <th>Azioni</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let p of prenotazioni$ | paginate: { itemsPerPage: itemsForPage, currentPage: currentPage }"
+            >
+              <td>{{ p.idPrenotazione }}</td>
+              <td>{{ p.dataInizio| date: 'dd-MM-yyyy' }}</td>
+              <td>{{ p.dataFine| date: 'dd-MM-yyyy' }}</td>
+              <td>{{ p.stato }}</td>
+              <td>
+                <button
+                  class="btn btn-sm btn-primary me-2"
+                  (click)="validaPrenotazione(p, 'APPROVATO')"
+                >
+                  Approva Prenotazione
+                </button>
+
+                <button
+                  class="btn btn-sm btn-danger"
+                  (click)="validaPrenotazione(p, 'DECLINATO')"
+                >
+                  Declina Prenotazione
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        } @else {
+        <p>Nessuna prenotazione trovata!</p>
+        }
+      </div>
+
+      <nav class="float-end mt-3" aria-label="Page navigation">
+        <pagination-controls
+          class="my-pagination"
+          (pageChange)="currentPage = $event"
+          previousLabel="Precedente"
+          nextLabel="Successivo"
+        ></pagination-controls>
+      </nav>
+
+      <div class="col-lg-2 col-md-3 col-6 mt-3">
+        <select class="form-select" [(ngModel)]="itemsForPage">
+          <option [value]="5">Mostra 5</option>
+          <option [value]="10">Mostra 10</option>
+          <option [value]="20">Mostra 20</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</section>
