@@ -43,7 +43,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/aggiungiutente/aggiungiutente').then((m) => m.Aggiungiutente),
     canActivate: [AuthGuard],
-    data: { roles: [Ruoli.amministratore] },
+    data: { roles: [Ruoli.amministratore, Ruoli.utente] },
   },
   {
     path: 'homepage/listaprenotazioni',

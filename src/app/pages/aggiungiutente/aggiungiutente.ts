@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { UtentiService } from '../../services/Data/utenti-service';
 import { Router } from '@angular/router';
+import { AuthJwtService } from '../../services/auth-jwt-service';
 
 @Component({
   selector: 'app-aggiungiutente',
@@ -18,11 +19,13 @@ import { Router } from '@angular/router';
 export class Aggiungiutente implements OnInit {
   utenteForm: FormGroup;
   isEditMode = false;
+  isAdmin = true;
 
   constructor(
     private fb: FormBuilder,
     private utentiService: UtentiService,
-    private router: Router
+    private router: Router,
+    private authJwtService: AuthJwtService
   ) {
     this.utenteForm = this.fb.group({
       id: [null],
@@ -55,7 +58,11 @@ export class Aggiungiutente implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const loggedRole = this.authJwtService.getUserRole();
+    if(loggedRole==='ROLE_USER')
+      this.isAdmin = false;
+  }
 
   onSubmit(): void {
     const rawDate = this.utenteForm.value.dataNascita;

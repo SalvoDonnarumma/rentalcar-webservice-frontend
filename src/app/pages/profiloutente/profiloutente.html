@@ -1,38 +1,42 @@
 <section class="profile-container">
   @if (utente$) {
-    <h2 class="profile-title">Profilo Utente</h2>
+  <h2 class="profile-title">Profilo Utente</h2>
 
-    <div class="profile-card">
-      <div class="profile-field">
-        <label>Nome:</label>
-        <span>{{ utente$.nome }}</span>
-      </div>
-
-      <div class="profile-field">
-        <label>Cognome:</label>
-        <span>{{ utente$.cognome }}</span>
-      </div>
-
-      <div class="profile-field">
-        <label>Email:</label>
-        <span>{{ utente$.email }}</span>
-      </div>
-
-      <div class="profile-field">
-        <label>Data di Nascita:</label>
-        <span>{{ utente$.dataNascita | date: 'dd-MM-yyyy' }}</span>
-      </div>
-
-      <div class="profile-field">
-        <label>Ruolo:</label>
-        <span class="badge">{{ utente$.ruolo }}</span>
-      </div>
+  <div class="profile-card">
+    <div class="profile-field">
+      <label>Nome:</label>
+      <span>{{ utente$.nome }}</span>
     </div>
+
+    <div class="profile-field">
+      <label>Cognome:</label>
+      <span>{{ utente$.cognome }}</span>
+    </div>
+
+    <div class="profile-field">
+      <label>Email:</label>
+      <span>{{ utente$.email }}</span>
+    </div>
+
+    <div class="profile-field">
+      <label>Data di Nascita:</label>
+      <span>{{ utente$.dataNascita | date: 'dd-MM-yyyy' }}</span>
+    </div>
+
+    <div class="profile-field">
+      <label>Ruolo:</label>
+      <span class="badge">{{ utente$.ruolo }}</span>
+    </div>
+  </div>
+  <div class="button-container">
+    <button class="btn btn-sm btn-primary me-2" (click)="modificaUtente()">
+      Modifica Dati Utente
+    </button>
+  </div>
+
   }
 </section>
 
 @if (errore) {
-  <div class="error-box">
-    {{ errore }}
-  </div>
+<div class="error-box">{{ errore }}</div>
 }

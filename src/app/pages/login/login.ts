@@ -15,9 +15,8 @@ import { CommonModule } from '@angular/common';
 export class Login implements OnInit {
   userId: string = "";
   password: string = "";
-  autenticato: boolean = false;
-  errorMsg: string = "Spiacente, la userid e/o password sono errati";
-  okMsg: string = "Autenticazione riuscita";
+  autenticato: boolean = true;
+  errorMsg: string = '';
 
   titolo: string = "Accesso & Autenticazione";
   sottotitolo: string = "Procedi ad inserire la userid e la password";
@@ -37,6 +36,7 @@ export class Login implements OnInit {
           this.route.navigate(['welcome',this.userId]);
         },
         error: (error) => {
+          this.errorMsg = error;
           console.log(error);
           this.autenticato = false;
         }

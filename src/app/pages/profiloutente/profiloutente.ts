@@ -43,4 +43,10 @@ export class Profiloutente implements OnInit {
       error.error.message || 'An error occurred while fetching data.';
   }
 
+  modificaUtente(){
+    this.router.navigate(['homepage/aggiungiutente'], {
+      state: { utente: this.utente$ },
+    });
+  }
+
 }

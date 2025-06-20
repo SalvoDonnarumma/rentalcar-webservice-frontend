@@ -16,9 +16,11 @@
           <div class="form-group">
                   <a href="#" class="ForgetPwd">Password Dimenticata?</a>
           </div>
-          <div class="alert alert-danger" role="alert" *ngIf='!autenticato'>
+          @if(!autenticato){
+            <div class="alert alert-danger">
               {{errorMsg}}
           </div>
+          }
       </div>
   </div>
 </div>

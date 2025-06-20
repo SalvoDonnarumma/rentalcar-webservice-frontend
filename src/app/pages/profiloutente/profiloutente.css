@@ -55,3 +55,22 @@
   border: 1px solid #a33;
   border-radius: 8px;
 }
+
+.button-container{
+  text-align: center;
+  margin: 20px;
+}
+button {
+  padding: 0.8rem;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
