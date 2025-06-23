@@ -95,8 +95,6 @@ export class AuthJwtService {
   }
 
   isTokenExpired(token: string): boolean {
-    if (!token) return true;
-
     try {
       const decoded = jwtDecode<DecodedToken>(token);
       const currentTime = Math.floor(Date.now() / 1000);
@@ -106,6 +104,11 @@ export class AuthJwtService {
       console.error('Token decoding failed:', error);
       return true;
     }
+  }
+
+  isTokenNull(token: string): boolean{
+    if (!token) return true;
+    return false;
   }
 }
 

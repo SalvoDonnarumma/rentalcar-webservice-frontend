@@ -20,6 +20,11 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const authToken = this.authService.getAuthToken();
 
+    if(this.authService.isTokenNull(authToken)){
+      const error = 'Credenziali inserite non valide!';
+      this.router.navigate(['login', error]);
+    }
+
     if(this.authService.isTokenExpired(authToken)){
       console.log('Token scaduto!');
       const error = 'Expired';

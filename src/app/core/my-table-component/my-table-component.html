@@ -1,0 +1,60 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th *ngFor="let h of tableConfig?.headers">
+        <button type="button" class="btn btn-light"
+                (click)="sortBy(h.key!)">
+          {{ h.label }}
+          <span *ngIf="sortedColumn === h.key">
+            <i [class]="'bi ' + (sortAsc ? 'bi-arrow-up' : 'bi-arrow-down')"></i>
+          </span>
+        </button>
+      </th>
+      
+      <th *ngIf="tableConfig?.actions?.length">Azioni</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <tr *ngFor="let row of (data ?? []) | paginate: currentPage : (tableConfig?.pagination?.itemsPerPage ?? 10)">
+      <td *ngFor="let h of tableConfig?.headers">
+        {{ row[h.key!] }}
+      </td>
+      
+      <td *ngIf="tableConfig?.actions?.length">
+        <div class="btn-group btn-group-sm">
+          <button *ngFor="let action of tableConfig?.actions"
+                  [class]="'btn ' + action.buttonConfig?.customClass"
+                  (click)="handleAction(action.type!, row)">
+            <i *ngIf="action.buttonConfig?.icon" [class]="action.buttonConfig?.icon"></i>
+            <span *ngIf="action.buttonConfig?.text">{{ action.buttonConfig?.text }}</span>
+          </button>
+        </div>
+      </td>
+    
+    </tr>
+  </tbody>
+</table>
+
+<div class="pagination-controls">
+  <button (click)="currentPage = currentPage - 1" [disabled]="currentPage === 1">
+    Prev
+  </button>
+
+  <span>Pagina {{ currentPage }}</span>
+
+  <button (click)="currentPage = currentPage + 1"
+          [disabled]="(currentPage * (tableConfig?.pagination?.itemsPerPage ?? 0)) >= (data?.length ?? 0)">
+    Next
+  </button>
+  
+  <label>
+    Items per page:
+    <select [(ngModel)]="itemsPerPage" (ngModelChange)="onItemsPerPageChange($event)">
+      <option *ngFor="let opt of tableConfig?.pagination?.itemsPerPageOptions" [value]="opt">
+        {{ opt }}
+      </option>
+    </select>
+  </label>
+  </div>
+  

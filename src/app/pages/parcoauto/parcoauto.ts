@@ -99,8 +99,6 @@ export class ParcoAuto {
                                   .subscribe({
                                     next: (veicoli: IVeicolo[]) => {
                                       this.veicoli$ = veicoli || [];
-                                      console.log('Veicoli estratti: ');
-                                      console.log(veicoli);
                                     },
                                     error: this.handleError.bind(this),
                                   });
@@ -127,8 +125,6 @@ export class ParcoAuto {
 
   handleResponse(response: any) {
     this.veicoli$ = response.data;
-    console.log('Veicoli estratti: ');
-    console.log(this.veicoli$);
     this.currentPage = 1;
   }
 

@@ -1,0 +1,11 @@
+<button 
+  [ngClass]="buttonConfig()?.customClass"
+  (click)="onClick()">
+
+  @if (buttonConfig()?.icon) {
+    <i [class]="buttonConfig()?.icon"></i>
+  }
+
+  {{ buttonConfig()?.text }}
+
+</button>
